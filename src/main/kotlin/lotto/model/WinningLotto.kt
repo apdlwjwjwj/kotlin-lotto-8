@@ -15,4 +15,15 @@ class WinningLotto(private val numbers: Lotto, private val bonus: Int) {
             throw IllegalArgumentException(Error.ERROR_PREFIX + Error.DUPLICATE_NUMBER)
         }
     }
+
+    fun match(userLotto: Lotto): LottoRank {
+        val userNumbers = userLotto.getSortedNumbers()
+
+        val matchCount = numbers.getSortedNumbers().intersect(userNumbers.toSet()).size
+
+        val matchBonus = userNumbers.contains(bonus)
+
+        return LottoRank.valueOf(matchCount, matchBonus)
+
+    }
 }

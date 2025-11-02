@@ -6,6 +6,7 @@ import lotto.model.Lotto
 import lotto.model.WinningLotto
 import lotto.constant.Error
 import lotto.constant.Number
+import lotto.model.LottoResult
 
 class LottoController(private val lottoView: LottoView) {
 
@@ -20,6 +21,9 @@ class LottoController(private val lottoView: LottoView) {
         val bonusNumber = getBonusNumber()
 
         val winningLotto = WinningLotto(winningNumber, bonusNumber)
+
+        val result = LottoResult(lottos, winningLotto, purchaseAmount)
+        lottoView.printResult(result)
 
     }
 
