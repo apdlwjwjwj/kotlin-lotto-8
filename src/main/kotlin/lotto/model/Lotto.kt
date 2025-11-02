@@ -1,9 +1,34 @@
 package lotto.model
 
+import lotto.constant.Error
+import lotto.constant.Number
+
 class Lotto(private val numbers: List<Int>) {
     init {
-        require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
+        validateSize()
+        validateDuplicate()
+        validateRange()
     }
 
-    // TODO: 추가 기능 구현
+    private fun validateSize() {
+        if (numbers.size != Number.LOTTO_COUNT) {
+            throw IllegalArgumentException(Error.ERROR_PREFIX + Error.INVALID_SIZE)
+        }
+    }
+
+    private fun validateDuplicate() {
+        if (numbers.toSet().size != numbers.size) {
+            throw IllegalArgumentException(Error.ERROR_PREFIX + Error.DUPLICATE_NUMBER)
+        }
+    }
+
+    private fun validateRange() {
+        if (numbers.any { it !in Number.LOTTO_START..Number.LOTTO_END }) {
+            throw IllegalArgumentException(Error.ERROR_PREFIX + Error.INVALID_RANGE)
+        }
+    }
+
+    fun getSortedNumbers(): List<Int> {
+        return numbers.sorted()
+    }
 }
