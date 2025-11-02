@@ -16,7 +16,7 @@ class LottoController(private val lottoView: LottoView) {
         return validateAmount(input)
     }
 
-    private fun validateAmount(input: String): Int{
+    fun validateAmount(input: String): Int{
         val amount = input.toIntOrNull()
             ?:throw IllegalArgumentException(Error.ERROR_PREFIX + Error.INVALID_NUMBER)
 
