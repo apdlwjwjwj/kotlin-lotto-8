@@ -13,21 +13,21 @@ class Lotto(private val numbers: List<Int>) {
     private fun validateSize() {
         if (numbers.size != Number.LOTTO_COUNT) {
             println(Error.ERROR_PREFIX + Error.INVALID_SIZE)
-            throw IllegalArgumentException()
+            throw IllegalArgumentException(Error.ERROR_PREFIX + Error.INVALID_SIZE)
         }
     }
 
     private fun validateDuplicate() {
         if (numbers.toSet().size != numbers.size) {
             println(Error.ERROR_PREFIX + Error.DUPLICATE_NUMBER)
-            throw IllegalArgumentException()
+            throw IllegalArgumentException(Error.ERROR_PREFIX + Error.DUPLICATE_NUMBER)
         }
     }
 
     private fun validateRange() {
         if (numbers.any { it !in Number.LOTTO_START..Number.LOTTO_END }) {
             println(Error.ERROR_PREFIX + Error.INVALID_RANGE)
-            throw IllegalArgumentException()
+            throw IllegalArgumentException(Error.ERROR_PREFIX + Error.INVALID_RANGE)
         }
     }
 
