@@ -22,6 +22,20 @@ class LottoView {
         }
     }
 
+    fun printRequestNumber(){
+        println()
+        println(Message.REQUEST_NUMBER)
+    }
+
+    fun printBonusNumber(){
+        println()
+        println(Message.REQUEST_BONUS_NUMBER)
+    }
+
+    fun printErrorMessage(message: String){
+        println(message)
+    }
+
     fun readInput(): String{
         return Console.readLine()
     }

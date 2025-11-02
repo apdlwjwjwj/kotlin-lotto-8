@@ -3,6 +3,7 @@ package lotto.controller
 import camp.nextstep.edu.missionutils.Randoms
 import lotto.view.LottoView
 import lotto.model.Lotto
+import lotto.model.WinningLotto
 import lotto.constant.Error
 import lotto.constant.Number
 
@@ -14,6 +15,12 @@ class LottoController(private val lottoView: LottoView) {
 
         val lottos = generateLotto(purchaseAmount)
         lottoView.printLotto(lottos)
+
+        val winningNumber = getWinningLotto()
+        val bonusNumber = getBonusNumber()
+
+        val winningLotto = WinningLotto(winningNumber, bonusNumber)
+
     }
 
     private fun getPurchaseAmount(): Int{
@@ -38,5 +45,20 @@ class LottoController(private val lottoView: LottoView) {
             val numbers = Randoms.pickUniqueNumbersInRange(Number.LOTTO_START, Number.LOTTO_END, Number.LOTTO_COUNT)
             Lotto(numbers)
         }
+    }
+
+    private fun getWinningLotto(): Lotto {
+        lottoView.printRequestNumber()
+        val input = lottoView.readInput()
+        val numbers = input.split(',')
+            .map { it.trim().toIntOrNull() ?: throw IllegalArgumentException(Error.ERROR_PREFIX + Error.INVALID_INPUT) }
+        return Lotto(numbers)
+    }
+
+    private fun getBonusNumber(): Int {
+        lottoView.printBonusNumber()
+        val input = lottoView.readInput()
+
+        return input.toIntOrNull() ?: throw IllegalArgumentException(Error.ERROR_PREFIX + Error.INVALID_INPUT)
     }
 }
