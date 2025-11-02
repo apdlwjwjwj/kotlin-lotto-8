@@ -9,10 +9,12 @@ class WinningLotto(private val numbers: Lotto, private val bonus: Int) {
 
     private fun validateBonusNumber() {
         if (bonus !in Number.LOTTO_START..Number.LOTTO_END) {
-            throw IllegalArgumentException(Error.ERROR_PREFIX + Error.INVALID_RANGE)
+            println(Error.ERROR_PREFIX + Error.INVALID_RANGE)
+            throw IllegalArgumentException()
         }
         if (numbers.getSortedNumbers().contains(bonus)) {
-            throw IllegalArgumentException(Error.ERROR_PREFIX + Error.DUPLICATE_NUMBER)
+            println(Error.ERROR_PREFIX + Error.DUPLICATE_NUMBER)
+            throw IllegalArgumentException()
         }
     }
 

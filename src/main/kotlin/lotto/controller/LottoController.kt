@@ -35,10 +35,14 @@ class LottoController(private val lottoView: LottoView) {
 
     fun validateAmount(input: String): Int{
         val amount = input.toIntOrNull()
-            ?:throw IllegalArgumentException(Error.ERROR_PREFIX + Error.INVALID_NUMBER)
+            ?: run {
+                println(Error.ERROR_PREFIX + Error.INVALID_NUMBER)
+                throw IllegalArgumentException()
+            }
 
-        if (amount%Number.LOTTO_UNIT != 0) {
-            throw IllegalArgumentException(Error.ERROR_PREFIX + Error.INVALID_PURCHASE_UNIT)
+        if (amount % Number.LOTTO_UNIT != 0) {
+            println(Error.ERROR_PREFIX + Error.INVALID_PURCHASE_UNIT)
+            throw IllegalArgumentException()
         }
 
         return amount/Number.LOTTO_UNIT
@@ -55,7 +59,10 @@ class LottoController(private val lottoView: LottoView) {
         lottoView.printRequestNumber()
         val input = lottoView.readInput()
         val numbers = input.split(',')
-            .map { it.trim().toIntOrNull() ?: throw IllegalArgumentException(Error.ERROR_PREFIX + Error.INVALID_INPUT) }
+            .map { it.trim().toIntOrNull() ?: run {
+                println(Error.ERROR_PREFIX + Error.INVALID_INPUT)
+                throw IllegalArgumentException()
+            } }
         return Lotto(numbers)
     }
 
@@ -63,6 +70,9 @@ class LottoController(private val lottoView: LottoView) {
         lottoView.printBonusNumber()
         val input = lottoView.readInput()
 
-        return input.toIntOrNull() ?: throw IllegalArgumentException(Error.ERROR_PREFIX + Error.INVALID_INPUT)
+        return input.toIntOrNull() ?: run {
+            println(Error.ERROR_PREFIX + Error.INVALID_INPUT)
+            throw IllegalArgumentException()
+        }
     }
 }
