@@ -1,7 +1,7 @@
 package lotto.constant
 
 object Error {
-    const val ERROR_PREFIX = "[ERROR]"
+    const val ERROR_PREFIX = "[ERROR] "
 
     const val INVALID_NUMBER = "숫자가 아닙니다."
     const val INVALID_PURCHASE_UNIT = "1000단위가 아닙니다."
